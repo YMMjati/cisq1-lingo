@@ -11,7 +11,7 @@ import nl.hu.cisq1.lingo.words.domain.exception.TooManyGuessesException;
 import java.util.HashMap;
 
 // This class doesn't use the database at the moment, this code will be refactored later.
-public class SessionService implements ISessionService{
+public class SessionService{
     private final WordServiceDummy wordServiceDummy;
     HashMap<String, Session> sessions = new HashMap<>();
 
@@ -20,24 +20,20 @@ public class SessionService implements ISessionService{
         this.wordServiceDummy = new WordServiceDummy(wordRepositoryDummy);
     }
 
-    @Override
     public String generateSession() {
         Word firstAnswer = new Word(wordServiceDummy.provideRandomWord(5));
         Session session = new Session(firstAnswer);
         return session.getUUID();
     }
 
-    @Override
     public boolean sessionExists_ById(String uuid) {
         return sessions.containsKey(uuid);
     }
 
-    @Override
     public Session getSession_ById(String uuid) {
         return this.sessions.get(uuid);
     }
 
-    @Override
     public void setSession_ById(String uuid, Session session) {
         this.sessions.replace(uuid, session);
     }

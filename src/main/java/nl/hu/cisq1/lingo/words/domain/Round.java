@@ -4,7 +4,7 @@ import nl.hu.cisq1.lingo.words.data.WordRepositoryDummy;
 
 import java.util.ArrayList;
 
-public class Round implements IRound {
+public class Round {
     Word answer;
     ArrayList<Word> guesses = new ArrayList<>();
 
@@ -12,12 +12,10 @@ public class Round implements IRound {
         this.answer = answer;
     }
 
-    @Override
     public Word getAnswer() {
         return answer;
     }
 
-    @Override
     public void addGuess(Word guess){
         this.guesses.add(guess);
     }

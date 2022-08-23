@@ -10,7 +10,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 public class LingoApplication {
     public static void main(String[] args) {
         SpringApplication.run(LingoApplication.class, args);
-
-
     }
 }
