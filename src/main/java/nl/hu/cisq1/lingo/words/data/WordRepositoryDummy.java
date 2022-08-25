@@ -76,14 +76,14 @@ public class WordRepositoryDummy {
             "garbage"
     };
 
-    public Word findRandomWordByLength(int length) {
+    public String findRandomWordByLength(int length) {
         int guessIndex = new Random().nextInt(20);
 
         return switch (length) {
-            case 5 -> new Word(this.wordList5[guessIndex]);
-            case 6 -> new Word(this.wordList6[guessIndex]);
-            case 7 -> new Word(this.wordList7[guessIndex]);
-            default -> new Word("invalid");
+            case 5 -> this.wordList5[guessIndex];
+            case 6 -> this.wordList6[guessIndex];
+            case 7 -> this.wordList7[guessIndex];
+            default -> "invalid";
         };
     }
 

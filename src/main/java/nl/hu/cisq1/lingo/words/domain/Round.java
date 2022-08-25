@@ -5,18 +5,18 @@ import nl.hu.cisq1.lingo.words.data.WordRepositoryDummy;
 import java.util.ArrayList;
 
 public class Round {
-    Word answer;
-    ArrayList<Word> guesses = new ArrayList<>();
+    String answer;
+    ArrayList<String> guesses = new ArrayList<>();
 
-    public Round(Word answer) {
+    public Round(String answer) {
         this.answer = answer;
     }
 
-    public Word getAnswer() {
+    public String getAnswer() {
         return answer;
     }
 
-    public void addGuess(Word guess){
+    public void addGuess(String guess){
         this.guesses.add(guess);
     }
 

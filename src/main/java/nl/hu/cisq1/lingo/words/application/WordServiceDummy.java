@@ -13,10 +13,8 @@ public class WordServiceDummy {
 
     public String provideRandomWord(Integer length) {
         return this.wordRepositoryDummy
-                .findRandomWordByLength(length)
+                .findRandomWordByLength(length);
                 // .orElseThrow(() -> new WordLengthNotSupportedException(length)) // <-- Belongs to inbuilt Optional class?
-                .getValue();
     }
 
-    // public boolean wordExists(String word)
 }

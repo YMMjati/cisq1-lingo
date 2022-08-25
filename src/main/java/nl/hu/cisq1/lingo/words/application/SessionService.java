@@ -12,18 +12,28 @@ import java.util.HashMap;
 
 // This class doesn't use the database at the moment, this code will be refactored later.
 public class SessionService{
-    private final WordServiceDummy wordServiceDummy;
+    private final WordServiceDummy wordServiceDummy; // This is not part of the final logic; for now this substitutes the database.
     HashMap<String, Session> sessions = new HashMap<>();
 
+
     public SessionService() {
+
+
+
         WordRepositoryDummy wordRepositoryDummy = new WordRepositoryDummy();
         this.wordServiceDummy = new WordServiceDummy(wordRepositoryDummy);
     }
 
     public String generateSession() {
+        /*
         Word firstAnswer = new Word(wordServiceDummy.provideRandomWord(5));
         Session session = new Session(firstAnswer);
+        // Repository!
         return session.getUUID();
+
+         */
+
+        return "okay";
     }
 
     public boolean sessionExists_ById(String uuid) {
@@ -31,14 +41,20 @@ public class SessionService{
     }
 
     public Session getSession_ById(String uuid) {
+
+
+
         return this.sessions.get(uuid);
+
+
+
     }
 
     public void setSession_ById(String uuid, Session session) {
         this.sessions.replace(uuid, session);
     }
 
-    public void newGuess(String uuid, Word guess) throws TooManyGuessesException {
+    public void newGuess(String uuid, String guess) throws TooManyGuessesException {
         Session session = this.getSession_ById(uuid);
 
         if (session.getLastRound().hasGuessesLeft() == false) {

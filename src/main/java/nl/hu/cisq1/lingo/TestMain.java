@@ -2,8 +2,10 @@ package nl.hu.cisq1.lingo;
 
 import nl.hu.cisq1.lingo.words.application.SessionService;
 import nl.hu.cisq1.lingo.words.application.WordService;
+import nl.hu.cisq1.lingo.words.data.SessionRepositoryDummy;
 import nl.hu.cisq1.lingo.words.data.WordRepository;
 import nl.hu.cisq1.lingo.words.data.WordRepositoryDummy;
+import nl.hu.cisq1.lingo.words.domain.Session;
 import nl.hu.cisq1.lingo.words.domain.Word;
 import nl.hu.cisq1.lingo.words.domain.enums.Mark;
 import nl.hu.cisq1.lingo.words.domain.exception.TooManyGuessesException;
@@ -17,6 +19,24 @@ public class TestMain {
 
     public static void main(String args[])
     {
+
+
+        SessionRepositoryDummy srd = new SessionRepositoryDummy();
+
+        Session testsession = srd.findSessionByUUID("Haribo");
+
+        if (testsession == null) {
+            System.out.println("Session does not exist!\n");
+        }
+
+
+
+
+
+
+
+
+
         SessionService sessionService = new SessionService();
 
         int guesses = 1;
@@ -27,18 +47,15 @@ public class TestMain {
 
         WordRepositoryDummy wrd = new WordRepositoryDummy();
 
-        Word answer = wrd.findRandomWordByLength(lengthArray[wordLength]);
+        String answer = wrd.findRandomWordByLength(lengthArray[wordLength]);
 
-        String answerPreview = answer.getValue().substring(0,1) + "_".repeat(answer.getLength() - 1);
+        String answerPreview = answer.substring(0,1) + "_".repeat(answer.length() - 1);
 
-        System.out.println("\n"+ guesses +"/"+ guessLimit +" Guesses | "+ answerPreview +" | ("+ answer.getValue() +") | Round: "+ round);
+        System.out.println("\n"+ guesses +"/"+ guessLimit +" Guesses | "+ answerPreview +" | ("+ answer +") | Round: "+ round);
 
 
 
         Scanner input = new Scanner(System.in);
-        Word inputWord;
-
-
 
 
         // This list contains the inputted word's feedback per character
@@ -49,25 +66,25 @@ public class TestMain {
 
         while (true){
             String inputString = input.nextLine().toLowerCase();
-            inputWord = new Word(inputString);
+            Word inputWord = new Word(inputString);
             guesses++;
 
 
             // This part of the code won't be in the real implementation!
-            System.out.println("\n"+ guesses +"/"+ guessLimit +" Guesses | "+ answerPreview +" | ("+ answer.getValue() +") | Round: "+ round);
+            System.out.println("\n"+ guesses +"/"+ guessLimit +" Guesses | "+ answerPreview +" | ("+ answer +") | Round: "+ round);
 
 
             if (inputString.equals("q") || inputString.equals("Q")) {
-                System.out.println("\nExiting the game. The correct answer was "+ answer.getValue() +".");
+                System.out.println("\nExiting the game. The correct answer was "+ answer +".");
                 break;
             }
 
             if (guesses >= 5) {
-                System.out.println("\nThe correct answer was "+ answer.getValue() +".");
+                System.out.println("\nThe correct answer was "+ answer +".");
                 break;
             }
 
-            if (inputWord.getLength() != answer.getLength()) {
+            if (inputString.length() != answer.length()) {
                 System.out.println("Invalid length!");
                 continue;
             }
@@ -76,34 +93,34 @@ public class TestMain {
                 System.out.println("Invalid characters!");
 
                 // If just one character is invalid, all characters will be counted as invalid.
-                for (int x = 0; x < answer.getLength(); x++)
+                for (int x = 0; x < answer.length(); x++)
                     feedbackList.add(Mark.Invalid);
 
                 continue;
             }
 
-            if (inputWord.equals(answer)) {
+            if (inputWord.equals(new Word(answer))) {
                 System.out.println("\nCorrect! (input Q to stop)");
 
                 guesses = 1;
                 round++;
                 wordLength = (round != 0) ? round % 3 : 1;
                 answer = wrd.findRandomWordByLength(lengthArray[wordLength]);
-                answerPreview = answer.getValue().substring(0,1) + "_".repeat(answer.getLength() - 1);
-                System.out.println("\n"+ guesses +"/"+ guessLimit +" Guesses | "+ answerPreview +" | ("+ answer.getValue() +") | Round: "+ round);
+                answerPreview = answer.substring(0,1) + "_".repeat(answer.length() - 1);
+                System.out.println("\n"+ guesses +"/"+ guessLimit +" Guesses | "+ answerPreview +" | ("+ answer +") | Round: "+ round);
 
                 continue;
             }
 
             ArrayList<Character> answerCharacters = new ArrayList<>();
-            for (int x = 0; x < answer.getLength(); x++)
-                answerCharacters.add(answer.getValue().charAt(x));
+            for (int x = 0; x < answer.length(); x++)
+                answerCharacters.add(answer.charAt(x));
 
             // Iterates through the inputted word and compares it by character
-            for (int x = 0; x < answer.getLength(); x++) {
+            for (int x = 0; x < answer.length(); x++) {
                 Mark mark;
 
-                if (inputWord.getValue().charAt(x) == answer.getValue().charAt(x)) {
+                if (inputWord.getValue().charAt(x) == answer.charAt(x)) {
                     mark = Mark.Correct;
                 }
                 else if (answerCharacters.contains(inputWord.getValue().charAt(x))) {

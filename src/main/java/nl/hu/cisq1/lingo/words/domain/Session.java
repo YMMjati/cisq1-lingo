@@ -10,7 +10,7 @@ public class Session {
     public ArrayList<Round> rounds = new ArrayList<>();
     public SessionStatus status = SessionStatus.Initial; // Needless?
 
-    public Session(Word firstAnswer) {
+    public Session(String firstAnswer) {
         this.uuid = UUID.randomUUID().toString();
         Round round = new Round(firstAnswer);
         this.addRound(round);
