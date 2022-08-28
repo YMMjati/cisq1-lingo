@@ -3,18 +3,20 @@ package nl.hu.cisq1.lingo.words.data;
 import nl.hu.cisq1.lingo.words.domain.Session;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 public class SessionRepositoryDummy {
-    HashMap<String,Session> sessions = new HashMap<String,Session>();
-    WordRepositoryDummy wrd = new WordRepositoryDummy(); // Not part of the final logic!
+    HashMap<UUID, Session> sessions = new HashMap<>();
 
-    public SessionRepositoryDummy () {
-        sessions.put("ID1", new Session(wrd.findRandomWordByLength(5)));
-        sessions.put("ID2", new Session(wrd.findRandomWordByLength(5)));
-        sessions.put("ID3", new Session(wrd.findRandomWordByLength(5)));
+    public Session getSession(UUID sessionId) {
+        return sessions.get(sessionId);
     }
 
-    public Session findSessionByUUID(String UUID) {
-        return sessions.get(UUID);
+    public void newSession(Session session) {
+        this.sessions.put(session.getId(), session);
+    }
+
+    public void modifySession(Session session) {
+        this.sessions.replace(session.getId(), session);
     }
 }

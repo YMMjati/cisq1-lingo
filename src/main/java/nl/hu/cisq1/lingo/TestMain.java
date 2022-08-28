@@ -1,6 +1,6 @@
 package nl.hu.cisq1.lingo;
 
-import nl.hu.cisq1.lingo.words.application.SessionService;
+import nl.hu.cisq1.lingo.words.application.TrainerServiceDummy;
 import nl.hu.cisq1.lingo.words.application.WordService;
 import nl.hu.cisq1.lingo.words.data.SessionRepositoryDummy;
 import nl.hu.cisq1.lingo.words.data.WordRepository;
@@ -13,31 +13,23 @@ import nl.hu.cisq1.lingo.words.domain.exception.TooManyGuessesException;
 import java.util.*;
 
 // This is a Main class meant for testing and developing the game's functionalities, without needing Spring.
-// This class will be removed in the final version.
 
 public class TestMain {
 
     public static void main(String args[])
     {
-
-
         SessionRepositoryDummy srd = new SessionRepositoryDummy();
 
-        Session testsession = srd.findSessionByUUID("Haribo");
+        // Session testsession = srd.findSessionByUUID("Haribo");
 
+        /*
         if (testsession == null) {
             System.out.println("Session does not exist!\n");
         }
+        */
 
 
-
-
-
-
-
-
-
-        SessionService sessionService = new SessionService();
+        TrainerServiceDummy trainerServiceDummy = new TrainerServiceDummy();
 
         int guesses = 1;
         int guessLimit = 5;

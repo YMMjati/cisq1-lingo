@@ -28,7 +28,7 @@ public class Session {
     public Session() {}
 
     public SessionReport getReport() {
-        return new SessionReport();
+        return new SessionReport(this);
     }
 
     public void guessWord(String guess) {

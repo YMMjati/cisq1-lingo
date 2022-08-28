@@ -7,7 +7,7 @@ import nl.hu.cisq1.lingo.words.domain.exception.WordLengthNotSupportedException;
 public class WordServiceDummy {
     private final WordRepositoryDummy wordRepositoryDummy;
 
-    public WordServiceDummy(WordRepositoryDummy wordRepositoryDummy) {
+    public WordServiceDummy() {
         this.wordRepositoryDummy = new WordRepositoryDummy();
     }
 

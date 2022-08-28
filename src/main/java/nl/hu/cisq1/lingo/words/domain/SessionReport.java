@@ -21,16 +21,16 @@ public class SessionReport {
         SessionStatus status;
 
         if (lastRound.getGuessAmount() == 0) {
-            status = SessionStatus.Initial;
+            status = SessionStatus.PLAYING;
         }
         else if (lastRound.lastGuessCorrect() == false && lastRound.hasGuessesLeft() == true) {
-            status = SessionStatus.Playing;
+            status = SessionStatus.PLAYING;
         }
         else if (lastRound.lastGuessCorrect() == true) {
-            status = SessionStatus.NextRound;
+            status = SessionStatus.PLAYING;
         }
         else {
-            status = SessionStatus.Eliminated;
+            status = SessionStatus.ELIMINATED;
         }
 
         return status;

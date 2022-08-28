@@ -45,8 +45,3 @@ Domain -> Word
     - Length == Value.length
 
 
-
-
-
-
-

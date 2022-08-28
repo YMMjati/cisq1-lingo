@@ -32,7 +32,7 @@ public class TrainerService {
     public SessionReport guessWord(UUID sessionId, String guess) {
         Session session = this.sessionRepository
                 .findById(sessionId)
-                .orElseThrow(() -> new SessionNotFoundException());
+                .orElseThrow(() -> new SessionNotFoundException(sessionId));
 
         session.guessWord(guess);
         // start next round if won with word of next length?
@@ -45,7 +45,7 @@ public class TrainerService {
     public SessionReport getSessionReport(UUID sessionId) {
         Session session = this.sessionRepository
                 .findById(sessionId)
-                .orElseThrow(() -> new SessionNotFoundException());
+                .orElseThrow(() -> new SessionNotFoundException(sessionId));
 
         return session.getReport();
     }

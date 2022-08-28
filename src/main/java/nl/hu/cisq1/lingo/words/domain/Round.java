@@ -37,9 +37,4 @@ public class Round {
     }
 
 
-
-    // Temp!
-    public String generateHint(int guessIndex) {
-        return "";
-    }
 }
