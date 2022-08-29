@@ -25,7 +25,4 @@ public class Word {
         return length;
     }
 
-    public Boolean hasValidCharacters() { return value.matches("^[a-zA-Z]*$"); }
-
-    public Boolean equals(Word comparisonWord) { return value.toLowerCase().equals(comparisonWord.value.toLowerCase()); }
 }

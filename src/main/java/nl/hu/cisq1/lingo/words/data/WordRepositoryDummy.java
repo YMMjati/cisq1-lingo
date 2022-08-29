@@ -1,8 +1,5 @@
 package nl.hu.cisq1.lingo.words.data;
 
-import nl.hu.cisq1.lingo.words.domain.Word;
-import nl.hu.cisq1.lingo.words.domain.exception.WordLengthNotSupportedException;
-
 import java.util.Random;
 
 // This is a temporary class for generating words without needing Spring or database access; it will be phased out later.

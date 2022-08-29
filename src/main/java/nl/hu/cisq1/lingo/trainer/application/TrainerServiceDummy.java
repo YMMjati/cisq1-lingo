@@ -1,14 +1,10 @@
-package nl.hu.cisq1.lingo.words.application;
+package nl.hu.cisq1.lingo.trainer.application;
 
-import nl.hu.cisq1.lingo.words.data.SessionRepositoryDummy;
-import nl.hu.cisq1.lingo.words.data.WordRepositoryDummy;
+import nl.hu.cisq1.lingo.trainer.data.SessionRepositoryDummy;
 import nl.hu.cisq1.lingo.words.application.WordServiceDummy;
-import nl.hu.cisq1.lingo.words.domain.Round;
-import nl.hu.cisq1.lingo.words.domain.Session;
-import nl.hu.cisq1.lingo.words.domain.Word;
-import nl.hu.cisq1.lingo.words.domain.enums.SessionStatus;
-import nl.hu.cisq1.lingo.words.domain.exception.SessionNotFoundException;
-import nl.hu.cisq1.lingo.words.domain.exception.TooManyGuessesException;
+import nl.hu.cisq1.lingo.trainer.domain.Round;
+import nl.hu.cisq1.lingo.trainer.domain.Session;
+import nl.hu.cisq1.lingo.trainer.domain.exception.*;
 
 import java.util.UUID;
 

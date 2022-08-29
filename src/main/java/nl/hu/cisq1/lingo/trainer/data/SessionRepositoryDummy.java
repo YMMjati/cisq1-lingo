@@ -1,6 +1,6 @@
-package nl.hu.cisq1.lingo.words.data;
+package nl.hu.cisq1.lingo.trainer.data;
 
-import nl.hu.cisq1.lingo.words.domain.Session;
+import nl.hu.cisq1.lingo.trainer.domain.Session;
 
 import java.util.HashMap;
 import java.util.UUID;

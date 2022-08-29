@@ -1,14 +1,10 @@
 package nl.hu.cisq1.lingo;
 
-import nl.hu.cisq1.lingo.words.application.TrainerServiceDummy;
-import nl.hu.cisq1.lingo.words.application.WordService;
-import nl.hu.cisq1.lingo.words.data.SessionRepositoryDummy;
-import nl.hu.cisq1.lingo.words.data.WordRepository;
+import nl.hu.cisq1.lingo.trainer.application.TrainerServiceDummy;
+import nl.hu.cisq1.lingo.trainer.data.SessionRepositoryDummy;
 import nl.hu.cisq1.lingo.words.data.WordRepositoryDummy;
-import nl.hu.cisq1.lingo.words.domain.Session;
 import nl.hu.cisq1.lingo.words.domain.Word;
 import nl.hu.cisq1.lingo.words.domain.enums.Mark;
-import nl.hu.cisq1.lingo.words.domain.exception.TooManyGuessesException;
 
 import java.util.*;
 
