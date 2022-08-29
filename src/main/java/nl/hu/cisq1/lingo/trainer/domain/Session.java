@@ -13,7 +13,7 @@ public class Session {
     public Session(String firstAnswer) {
         this.id = UUID.randomUUID();
         Round round = new Round(this.id, firstAnswer);
-        this.newRound(round);
+        this.rounds.add(round);
     }
 
     public boolean guessWord(String guess) throws TooManyGuessesException {
@@ -47,7 +47,7 @@ public class Session {
             status = SessionStatus.PLAYING;
         else if (!lastRound.lastGuessCorrect() && lastRound.hasGuessesLeft())
             status = SessionStatus.PLAYING;
-        else if (!lastRound.lastGuessCorrect())
+        else if (lastRound.lastGuessCorrect())
             status = SessionStatus.PLAYING;
         else
             status = SessionStatus.ELIMINATED;
@@ -69,24 +69,29 @@ public class Session {
         Round lastRound = this.getLastRound();
         String answer = lastRound.getAnswer();
         String lastGuess = lastRound.getLastGuess();
-
         List<Mark> lastGuessFeedback = new ArrayList<>();
         List<String> lettersToGuess = Arrays.asList(answer.split(""));
         List<String> letters = Arrays.asList(lastGuess.split(""));
 
-        if (lastGuess.length() != answer.length() || !lastGuess.matches("^[a-zA-Z]*$")) {
+        if (lastRound.getGuessAmount() > 0 && lastGuess.length() != answer.length()) {
             lastGuessFeedback = Collections.nCopies(answer.length(), Mark.INVALID);
             return lastGuessFeedback;
         }
 
         for (int i = 0; i < lettersToGuess.size(); i++) {
+            if (!letters.get(i).matches("^[a-zA-Z]*$")) {
+                lastGuessFeedback.add(Mark.INVALID);
+                continue;
+            }
+
             if (letters.get(i).equals(lettersToGuess.get(i))) {
                 lastGuessFeedback.add(Mark.CORRECT);
                 lettersToGuess.set(i, "_");
             }
-            if (!letters.get(i).equals(lettersToGuess.get(i)) && lettersToGuess.contains(i)) {
+            else if (lettersToGuess.contains(letters.get(i))) {
                 lastGuessFeedback.add(Mark.PRESENT);
-                lettersToGuess.set(i, "_");
+
+                lettersToGuess.set(lettersToGuess.indexOf(letters.get(i)), "_");
             }
             else {
                 lastGuessFeedback.add(Mark.ABSENT);

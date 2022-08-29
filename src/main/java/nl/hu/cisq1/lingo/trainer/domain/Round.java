@@ -34,7 +34,7 @@ public class Round {
     }
 
     public String getLastGuess() {
-        return this.guesses.get(this.guesses.size() - 1);
+        return this.guesses.size() >= 1 ? this.guesses.get(this.guesses.size() - 1) : this.answer.substring(0, 1) + "_".repeat(answer.length() - 1);
     }
 
     public int getGuessAmount () {

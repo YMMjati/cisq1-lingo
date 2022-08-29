@@ -33,9 +33,6 @@ public class TrainerServiceDummy {
         if (session == null)
             throw new SessionNotFoundException(sessionId);
 
-        if (session == null)
-            throw new SessionNotFoundException(sessionId);
-
         Round lastRound = session.getLastRound();
 
         if (!lastRound.hasGuessesLeft())
@@ -47,7 +44,7 @@ public class TrainerServiceDummy {
         if (lastRound.lastGuessCorrect()) {
             int[] lengthArray = new int[]{7, 5, 6};
             int roundNumber = session.getLastRoundNumber();
-            int wordLength = (roundNumber != 0) ? roundNumber % 3 : 1;
+            int wordLength = roundNumber % 3;
             String answer = this.wordControllerDummy.getRandomWord(lengthArray[wordLength]);
             Round round = new Round(sessionId, answer);
             session.newRound(round);
