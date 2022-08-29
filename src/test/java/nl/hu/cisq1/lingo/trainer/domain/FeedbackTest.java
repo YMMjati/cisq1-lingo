@@ -14,6 +14,9 @@ import static nl.hu.cisq1.lingo.trainer.domain.enums.Mark.*;
 import static org.junit.jupiter.api.Assertions.*;
 
 class FeedbackTest {
+
+    // These tests are temporarily commented out
+    /*
     @Test
     @DisplayName("shows word is guessed")
     public void guessIsCorrect() {
@@ -55,4 +58,6 @@ class FeedbackTest {
                 Arguments.of("baard", "bonje", List.of(CORRECT, ABSENT, ABSENT, ABSENT, ABSENT))
         );
     }
+
+     */
 }

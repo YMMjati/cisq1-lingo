@@ -16,21 +16,16 @@ public class Session {
         this.newRound(round);
     }
 
-
     public boolean guessWord(String guess) throws TooManyGuessesException {
-        if (!this.getLastRound().hasGuessesLeft()) {
+        if (!this.getLastRound().hasGuessesLeft())
             throw new TooManyGuessesException();
-        }
 
         Round round = this.rounds.get(rounds.size() - 1);
         round.addGuess(guess);
         this.setLastRound(round);
 
-        if (round.lastGuessCorrect()) {
+        if (round.lastGuessCorrect())
             return true;
-        }
-
-        // Evaluate sessionStatus in SessionService!
 
         return false;
     }
@@ -38,9 +33,8 @@ public class Session {
     public void newRound(Round round) throws SessionEliminatedException {
         SessionStatus status = this.evaluateStatus();
 
-        if (status == SessionStatus.ELIMINATED) {
+        if (status == SessionStatus.ELIMINATED)
             throw new SessionEliminatedException(this.getId());
-        }
 
         this.rounds.add(round);
     }
@@ -49,18 +43,14 @@ public class Session {
         Round lastRound = this.getLastRound();
         SessionStatus status;
 
-        if (lastRound.getGuessAmount() == 0) {
+        if (lastRound.getGuessAmount() == 0)
             status = SessionStatus.PLAYING;
-        }
-        else if (lastRound.lastGuessCorrect() == false && lastRound.hasGuessesLeft() == true) {
+        else if (!lastRound.lastGuessCorrect() && lastRound.hasGuessesLeft())
             status = SessionStatus.PLAYING;
-        }
-        else if (lastRound.lastGuessCorrect() == true) {
+        else if (!lastRound.lastGuessCorrect())
             status = SessionStatus.PLAYING;
-        }
-        else {
+        else
             status = SessionStatus.ELIMINATED;
-        }
 
         return status;
     }
@@ -116,7 +106,7 @@ public class Session {
     }
 
     public int getLastRoundNumber() {
-        return rounds.size();
+        return this.rounds.size();
     }
 
     public void setLastRound(Round round) {

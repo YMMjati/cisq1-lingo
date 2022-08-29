@@ -1,11 +1,8 @@
 package nl.hu.cisq1.lingo.trainer.application;
 
 import nl.hu.cisq1.lingo.trainer.data.SessionRepository;
-import nl.hu.cisq1.lingo.trainer.domain.exception.SessionNotFoundException;
 import nl.hu.cisq1.lingo.words.application.WordService;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 public class TrainerService {

@@ -1,7 +1,5 @@
 package nl.hu.cisq1.lingo.trainer.domain;
 
-import nl.hu.cisq1.lingo.words.data.WordRepositoryDummy;
-
 import java.util.ArrayList;
 import java.util.UUID;
 
@@ -15,10 +13,6 @@ public class Round {
         this.answer = answer;
     }
 
-    public String getAnswer() {
-        return answer;
-    }
-
     public void addGuess(String guess){
         this.guesses.add(guess);
     }
@@ -27,12 +21,12 @@ public class Round {
         return (this.guesses.size() < 5);
     }
 
-    public int getGuessAmount () {
-        return this.guesses.size();
-    }
-
     public boolean lastGuessCorrect() {
         return this.getLastGuess().equals(this.answer);
+    }
+
+    public String getAnswer() {
+        return answer;
     }
 
     public int getScore () {
@@ -41,5 +35,9 @@ public class Round {
 
     public String getLastGuess() {
         return this.guesses.get(this.guesses.size() - 1);
+    }
+
+    public int getGuessAmount () {
+        return this.guesses.size();
     }
 }

@@ -1,85 +1,70 @@
 package nl.hu.cisq1.lingo.trainer.application;
 
 import nl.hu.cisq1.lingo.trainer.data.SessionRepositoryDummy;
-import nl.hu.cisq1.lingo.words.application.WordServiceDummy;
+import nl.hu.cisq1.lingo.trainer.domain.exception.SessionNotFoundException;
+import nl.hu.cisq1.lingo.trainer.domain.SessionReport;
 import nl.hu.cisq1.lingo.trainer.domain.Round;
 import nl.hu.cisq1.lingo.trainer.domain.Session;
 import nl.hu.cisq1.lingo.trainer.domain.exception.*;
+import nl.hu.cisq1.lingo.words.presentation.RandomWordControllerDummy;
 
 import java.util.UUID;
 
 public class TrainerServiceDummy {
-    private final WordServiceDummy wordServiceDummy;
+    private final RandomWordControllerDummy wordControllerDummy;
     private final SessionRepositoryDummy sessionRepositoryDummy;
 
     public TrainerServiceDummy() {
         this.sessionRepositoryDummy = new SessionRepositoryDummy();
-        this.wordServiceDummy = new WordServiceDummy();
+        this.wordControllerDummy = new RandomWordControllerDummy();
     }
 
-    public UUID newSession() {
-        String firstAnswer = this.wordServiceDummy.provideRandomWord(5);
+    public SessionReport startSession() {
+        String firstAnswer = this.wordControllerDummy.getRandomWord(5);
         Session session = new Session(firstAnswer);
-        return session.getId();
+        this.sessionRepositoryDummy.newSession(session);
+
+        return new SessionReport(session);
     }
 
-    // This method is not used in the real implementation
-    public Session getSessionById(UUID sessionId) throws SessionNotFoundException {
+    public SessionReport guessWord(UUID sessionId, String guess) throws SessionNotFoundException, TooManyGuessesException {
         Session session = this.sessionRepositoryDummy.getSession(sessionId);
 
-        if (session == null) {
+        if (session == null)
             throw new SessionNotFoundException(sessionId);
-        }
 
-        return session;
-    }
+        if (session == null)
+            throw new SessionNotFoundException(sessionId);
 
-    // This method is not used in the real implementation
-    public void modifySession(Session session) throws SessionNotFoundException {
-        Session oldSession = this.sessionRepositoryDummy.getSession(session.getId());
+        Round lastRound = session.getLastRound();
 
-        if (oldSession == null) {
-            throw new SessionNotFoundException(session.getId());
-        }
+        if (!lastRound.hasGuessesLeft())
+            throw new TooManyGuessesException();
 
-        if (session.getId() != oldSession.getId()) {
-            throw new SessionNotFoundException(session.getId());
+        lastRound.addGuess(guess);
+        session.setLastRound(lastRound);
+
+        if (lastRound.lastGuessCorrect()) {
+            int[] lengthArray = new int[]{7, 5, 6};
+            int roundNumber = session.getLastRoundNumber();
+            int wordLength = (roundNumber != 0) ? roundNumber % 3 : 1;
+            String answer = this.wordControllerDummy.getRandomWord(lengthArray[wordLength]);
+            Round round = new Round(sessionId, answer);
+            session.newRound(round);
         }
 
         this.sessionRepositoryDummy.modifySession(session);
 
-        return;
+        return new SessionReport(session);
     }
 
-
-    public void guessWord(UUID sessionId, String guess) throws TooManyGuessesException {
+    public SessionReport getSessionReport(UUID sessionId) throws SessionNotFoundException {
         Session session = this.sessionRepositoryDummy.getSession(sessionId);
 
-        if (session == null) {
-            throw new SessionNotFoundException(session.getId());
-        }
+        if (session == null)
+            throw new SessionNotFoundException(sessionId);
 
-
-
-        // Game already over exception!
-
-
-        if (session.getLastRound().hasGuessesLeft() == false) {
-            throw new TooManyGuessesException();
-        }
-
-        Round lastRound = session.getLastRound();
-        lastRound.addGuess(guess);
-        session.setLastRound(lastRound);
-
-        this.modifySession(session);
-
-
-        // this.setSession_ById(uuid, session);
+        return new SessionReport(session);
     }
-
-    // getSessionReport() {
-   ///}
-
 
 }
