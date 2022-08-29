@@ -7,11 +7,11 @@ import java.util.UUID;
 @Entity(name = "guesses")
 public class Guess {
     @Id
+    @GeneratedValue
     private UUID id;
     private String value;
 
     public Guess(String value) {
-        this.id = UUID.randomUUID();
         this.value = value;
     }
 

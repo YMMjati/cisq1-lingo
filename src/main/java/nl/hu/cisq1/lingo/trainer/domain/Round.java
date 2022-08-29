@@ -6,14 +6,14 @@ import java.util.*;
 @Entity(name = "rounds")
 public class Round {
     @Id
-    UUID id;
-    String answer;
+    @GeneratedValue
+    private UUID id;
+    private String answer;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     List<Guess> guesses = new ArrayList<>();
 
     public Round(String answer) {
-        this.id = UUID.randomUUID();
         this.answer = answer;
     }
 

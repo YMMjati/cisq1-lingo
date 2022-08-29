@@ -4,9 +4,7 @@ import nl.hu.cisq1.lingo.trainer.domain.Round;
 import nl.hu.cisq1.lingo.trainer.domain.enums.*;
 import nl.hu.cisq1.lingo.trainer.domain.exception.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.*;
 
 @Entity(name = "sessions")
@@ -14,7 +12,7 @@ public class Session {
     @Id
     private UUID id;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.ALL})
     private List<Round> rounds = new ArrayList<>();
     
     public Session(String firstAnswer) {
@@ -25,20 +23,6 @@ public class Session {
 
     public Session() {
 
-    }
-
-    public boolean guessWord(String guess) throws TooManyGuessesException {
-        if (!this.getLastRound().hasGuessesLeft())
-            throw new TooManyGuessesException();
-
-        Round round = this.rounds.get(rounds.size() - 1);
-        round.addGuess(guess);
-        this.setLastRound(round);
-
-        if (round.lastGuessCorrect())
-            return true;
-
-        return false;
     }
 
     public void newRound(Round round) throws SessionEliminatedException {
