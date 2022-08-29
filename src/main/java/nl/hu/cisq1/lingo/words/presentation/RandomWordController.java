@@ -27,4 +27,8 @@ public class RandomWordController {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, exception.getMessage());
         }
     }
+
+    public String getRandomWordLocal(int length) {
+        return "yoyyyy";
+    }
 }

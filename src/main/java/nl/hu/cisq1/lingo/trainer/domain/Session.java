@@ -4,16 +4,27 @@ import nl.hu.cisq1.lingo.trainer.domain.Round;
 import nl.hu.cisq1.lingo.trainer.domain.enums.*;
 import nl.hu.cisq1.lingo.trainer.domain.exception.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.*;
 
+@Entity(name = "sessions")
 public class Session {
+    @Id
     private UUID id;
-    private ArrayList<Round> rounds = new ArrayList<>();
+
+    @OneToMany
+    private List<Round> rounds = new ArrayList<>();
     
     public Session(String firstAnswer) {
         this.id = UUID.randomUUID();
-        Round round = new Round(this.id, firstAnswer);
+        Round round = new Round(firstAnswer);
         this.rounds.add(round);
+    }
+
+    public Session() {
+
     }
 
     public boolean guessWord(String guess) throws TooManyGuessesException {

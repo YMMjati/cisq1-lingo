@@ -46,7 +46,7 @@ public class TrainerServiceDummy {
             int roundNumber = session.getLastRoundNumber();
             int wordLength = roundNumber % 3;
             String answer = this.wordControllerDummy.getRandomWord(lengthArray[wordLength]);
-            Round round = new Round(sessionId, answer);
+            Round round = new Round(answer);
             session.newRound(round);
         }
 
