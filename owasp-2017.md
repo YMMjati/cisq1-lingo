@@ -59,7 +59,16 @@ Github Dependabot is active for the repository, it automatically sends pull requ
 These requests are handled manually by the developer(s).
 The OWASP dependency checker (for Maven) has been added to pom.xml, it runs automatically for every commit to Github and can also be run manually with a Maven command.
 Finally, SonarCloud provides static analyses and security analyses; these run the same way as the dependency checker.
-These tools didn't detect any real vulnerabilities at the point of writing this.
 As an extra security measure, unused dependencies can be removed manually from the project.
 The dependencies can also be analyzed for vulnerabilities using the Common Vulnerabilities and Exposures (CVE) list, and the National Vulnerability Database (NVD) list.
 Both are freely available online.
+
+### Risk update (30-08-2022)
+SonarCloud didn't detect any vulnerabilities.
+The OWASP dependency checker found several (critical) vulnerabilities:
+- h2-1.4.200.jar
+- jackson-databind-2.13.1.jar
+- postgresql-42.3.1.jar
+- spring-core-5.3.15.jar
+- spring-web-5.3.15.jar
+- tomcat-embed-core-9.0.56.jar
