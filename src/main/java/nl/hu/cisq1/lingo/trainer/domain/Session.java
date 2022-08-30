@@ -7,6 +7,7 @@ import nl.hu.cisq1.lingo.trainer.domain.exception.*;
 import javax.persistence.*;
 import java.util.*;
 
+// This class represents the game sessions played by one or more players.
 @Entity(name = "sessions")
 public class Session {
     @Id
@@ -34,6 +35,8 @@ public class Session {
         this.rounds.add(round);
     }
 
+    // The evaluate methods are used for retrieving the session's derived attributes.
+    // SessionReport is where these results go.
     public SessionStatus evaluateStatus () {
         Round lastRound = this.getLastRound();
         SessionStatus status;

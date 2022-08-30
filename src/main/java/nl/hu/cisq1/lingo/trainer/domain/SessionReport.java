@@ -5,6 +5,7 @@ import nl.hu.cisq1.lingo.trainer.domain.enums.*;
 import java.util.List;
 import java.util.UUID;
 
+// This class is used to compile all of a session's important (and derived) attributes in one place.
 public class SessionReport {
     private final UUID id;
     private final SessionStatus status;
@@ -32,6 +33,7 @@ public class SessionReport {
         this.answer = (this.attempts >= 5) ? session.getLastRound().getAnswer() : "";
     }
 
+    // This method encloses the player's guess within the appropriate brackets, this is to have a user-readable form of feedback.
     private String feedbackToText(String answer) {
         StringBuilder feedbackText = new StringBuilder();
 
@@ -50,7 +52,7 @@ public class SessionReport {
         return feedbackText.toString();
     }
 
-    // This method returns the first incorrect character.
+    // This method returns the first incorrect character as a hint.
     // But only if there are 3 or more characters left to guess, and there are at least 2 previous attempts.
     private String generateHint(String answer) {
         String hint = "_";

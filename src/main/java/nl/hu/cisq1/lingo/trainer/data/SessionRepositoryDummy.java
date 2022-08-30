@@ -5,6 +5,7 @@ import nl.hu.cisq1.lingo.trainer.domain.Session;
 import java.util.HashMap;
 import java.util.UUID;
 
+// This is a test variant of SessionRepository, it may be phased out later.
 public class SessionRepositoryDummy {
     HashMap<UUID, Session> sessions = new HashMap<>();
 

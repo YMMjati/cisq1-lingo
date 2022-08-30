@@ -10,6 +10,7 @@ import nl.hu.cisq1.lingo.words.presentation.RandomWordControllerDummy;
 
 import java.util.UUID;
 
+// This is a test variant of TrainerService, it may be phased out later.
 public class TrainerServiceDummy {
     private final RandomWordControllerDummy wordControllerDummy;
     private final SessionRepositoryDummy sessionRepositoryDummy;

@@ -6,6 +6,7 @@ import nl.hu.cisq1.lingo.trainer.domain.exception.SessionNotFoundException;
 
 import java.util.UUID;
 
+// This is a test variant of TrainerController, it may be phased out later.
 public class TrainerControllerDummy {
     private final TrainerServiceDummy trainerServiceDummy;
 

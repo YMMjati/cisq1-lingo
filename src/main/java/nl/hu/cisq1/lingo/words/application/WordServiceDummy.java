@@ -2,6 +2,7 @@ package nl.hu.cisq1.lingo.words.application;
 
 import nl.hu.cisq1.lingo.words.data.WordRepositoryDummy;
 
+// This is a test variant of WordService, it may be phased out later.
 public class WordServiceDummy {
     private final WordRepositoryDummy wordRepositoryDummy;
 

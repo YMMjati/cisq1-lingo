@@ -3,6 +3,7 @@ package nl.hu.cisq1.lingo.trainer.domain;
 import javax.persistence.*;
 import java.util.*;
 
+// This class represents the rounds that a game session consists of.
 @Entity(name = "rounds")
 public class Round {
     @Id

@@ -16,7 +16,6 @@ public class TestMain {
         SessionReport sessionReport = trainerControllerDummy.newSession();
         System.out.println(sessionReport);
 
-        // Game loop
         while (true) {
             String inputString = input.nextLine().toLowerCase();
 
