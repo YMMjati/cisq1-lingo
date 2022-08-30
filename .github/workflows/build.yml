@@ -14,7 +14,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Build with Maven
-          run: mvn -B verify -Dspring.profiles.active=ci
+          run: mvn -B verify
       - name: Cache Maven packages
         uses: actions/cache@v1
         with:
