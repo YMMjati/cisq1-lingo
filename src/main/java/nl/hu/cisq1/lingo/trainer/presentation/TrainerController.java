@@ -2,29 +2,30 @@ package nl.hu.cisq1.lingo.trainer.presentation;
 
 import nl.hu.cisq1.lingo.trainer.application.TrainerService;
 import nl.hu.cisq1.lingo.trainer.domain.SessionReport;
+import org.springframework.web.bind.annotation.*;
 
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+// TODO let op juiste HTTP statuscodes en richt je bij URLs op resources en niet op acties
 @RestController
-@RequestMapping("/sessions")
+@RequestMapping("/trainer")
 public class TrainerController {
-    private final TrainerService service;
+    private TrainerService service;
 
     public TrainerController(TrainerService service) {
         this.service = service;
     }
 
-    @PutMapping("/new")
-    public SessionReport newSession() {
+    @PostMapping("/session")
+    public SessionReport createNewSession() {
         return this.service.startSession();
     }
 
+    @PostMapping("/session/{id}/guess")
+    public SessionReport guessWord(@PathVariable int sessionId, @RequestBody GuessDto guessDto) {
+        return this.service.guessWord(sessionId, guessDto.attempt);
+    }
 
-
-
-    // @RequestParam Integer length
-
-
+    @GetMapping("/session/{id}")
+    public SessionReport getSession(@PathVariable int sessionId) {
+        return this.service.getSessionReport(sessionId);
+    }
 }
