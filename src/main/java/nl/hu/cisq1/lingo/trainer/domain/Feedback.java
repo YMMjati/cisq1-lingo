@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import java.util.*;
 
 import static nl.hu.cisq1.lingo.trainer.domain.enums.Mark.CORRECT;
+import static nl.hu.cisq1.lingo.trainer.domain.enums.Mark.INVALID;
 
 @Entity
 public class Feedback {
@@ -32,7 +33,7 @@ public class Feedback {
     public static Feedback evaluate(String wordToGuess, String guess) {
         List<Mark> marks = new ArrayList<>();
 
-        if (wordToGuess.length() != guess.length()) {
+        if ((wordToGuess.length() != guess.length())) {
             marks = Collections.nCopies(wordToGuess.length(), Mark.INVALID);
             return new Feedback(marks);
         }
@@ -41,9 +42,20 @@ public class Feedback {
         List<String> letters = Arrays.asList(guess.split(""));
 
         for (int i = 0; i < lettersToGuess.size(); i++) {
+            if (!letters.get(i).matches("^[a-zA-Z]*$")) {
+                marks.add(INVALID);
+                continue;
+            }
+
             if (letters.get(i).equals(lettersToGuess.get(i))) {
                 marks.add(CORRECT);
-            } else {
+                lettersToGuess.set(i, "_");
+            }
+            else if (lettersToGuess.contains(letters.get(i))) {
+                marks.add(Mark.PRESENT);
+                lettersToGuess.set(lettersToGuess.indexOf(letters.get(i)), "_");
+            }
+            else {
                 marks.add(Mark.ABSENT);
             }
         }
@@ -64,7 +76,7 @@ public class Feedback {
 
         for (int i = 0; i < marks.size(); i++) {
             if (marks.get(i).equals(CORRECT)) {
-                nextHint += wordToGuess;
+                nextHint += wordToGuess.charAt(i);
             } else {
                 nextHint += previousHint.charAt(i);
             }

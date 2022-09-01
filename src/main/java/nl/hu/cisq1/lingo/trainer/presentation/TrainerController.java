@@ -19,12 +19,12 @@ public class TrainerController {
         return this.service.startSession();
     }
 
-    @PostMapping("/session/{id}/guess")
+    @PostMapping("/session/{sessionId}/guess")
     public SessionReport guessWord(@PathVariable int sessionId, @RequestBody GuessDto guessDto) {
         return this.service.guessWord(sessionId, guessDto.attempt);
     }
 
-    @GetMapping("/session/{id}")
+    @GetMapping("/session/{sessionId}")
     public SessionReport getSession(@PathVariable int sessionId) {
         return this.service.getSessionReport(sessionId);
     }

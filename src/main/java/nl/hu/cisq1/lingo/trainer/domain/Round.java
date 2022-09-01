@@ -28,7 +28,7 @@ public class Round {
     public Round(String wordToGuess) {
         this.wordToGuess = wordToGuess;
         this.feedbackList = new ArrayList<>();
-        this.hint = wordToGuess.charAt(0) + ".".repeat(wordToGuess.length() - 1);
+        this.hint = wordToGuess.charAt(0) + "_".repeat(wordToGuess.length() - 1);
     }
     public Round() {}
 

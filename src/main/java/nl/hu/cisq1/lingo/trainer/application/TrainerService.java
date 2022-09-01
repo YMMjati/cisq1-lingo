@@ -3,7 +3,7 @@ package nl.hu.cisq1.lingo.trainer.application;
 import nl.hu.cisq1.lingo.trainer.data.SessionRepository;
 import nl.hu.cisq1.lingo.trainer.domain.Session;
 import nl.hu.cisq1.lingo.trainer.domain.SessionReport;
-import nl.hu.cisq1.lingo.trainer.domain.exception.SessionNotFoundException;
+import nl.hu.cisq1.lingo.trainer.domain.exception.*;
 import nl.hu.cisq1.lingo.words.application.WordService;
 import org.springframework.stereotype.Service;
 
@@ -29,10 +29,14 @@ public class TrainerService {
         return session.getReport();
     }
 
-    public SessionReport guessWord(int sessionId, String guess) {
+    public SessionReport guessWord(int sessionId, String guess) throws SessionNotFoundException, GuessNullException {
         Session session = this.sessionRepository
                 .findById(sessionId)
                 .orElseThrow(() -> new SessionNotFoundException(sessionId));
+
+        if (guess == null) {
+            throw new GuessNullException();
+        }
 
         session.guessWord(guess);
 
