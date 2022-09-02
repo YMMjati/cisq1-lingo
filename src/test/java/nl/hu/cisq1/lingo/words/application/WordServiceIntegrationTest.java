@@ -3,14 +3,12 @@ package nl.hu.cisq1.lingo.words.application;
 import nl.hu.cisq1.lingo.words.data.WordRepository;
 import nl.hu.cisq1.lingo.words.domain.Word;
 import nl.hu.cisq1.lingo.words.domain.exception.WordLengthNotSupportedException;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.Assert.*;
+
 
 @SpringBootTest
 class WordServiceIntegrationTest {
@@ -39,35 +37,35 @@ class WordServiceIntegrationTest {
     @DisplayName("word exists")
     void wordExists() {
         boolean result = this.service.wordExists(RANDOM_WORD_5);
-        assertTrue(result);
+        Assertions.assertTrue(result);
     }
 
     @Test
     @DisplayName("word does not exist")
     void wordDoesNotExist() {
         boolean result = this.service.wordExists("goner");
-        assertFalse(result);
+        Assertions.assertFalse(result);
     }
 
     @Test
     @DisplayName("provides 5 letter word")
     void provides5LetterWord() {
         String randomWord = this.service.provideRandomWord(5);
-        assertEquals(RANDOM_WORD_5, randomWord);
+        Assertions.assertEquals(RANDOM_WORD_5, randomWord);
     }
 
     @Test
     @DisplayName("provides 6 letter word")
     void provides6LetterWord() {
         String randomWord = this.service.provideRandomWord(6);
-        assertEquals(RANDOM_WORD_6, randomWord);
+        Assertions.assertEquals(RANDOM_WORD_6, randomWord);
     }
 
     @Test
     @DisplayName("provides 7 letter word")
     void provides7LetterWord() {
         String randomWord = this.service.provideRandomWord(7);
-        assertEquals(RANDOM_WORD_7, randomWord);
+        Assertions.assertEquals(RANDOM_WORD_7, randomWord);
     }
 
     @BeforeEach
