@@ -21,21 +21,10 @@
         <sonar.projectKey>YMMjati_cisq1-lingo</sonar.projectKey>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.exclusions>**/LingoApplication.java</sonar.exclusions>
-        <junit-jupiter.version>5.8.2</junit-jupiter.version>
-        <!--<junit-vintage-engine.version>5.8.2</junit-vintage-engine.version>-->
+        <junit-jupiter.version>5.9.0</junit-jupiter.version>
     </properties>
 
 
-
-    <dependencyManagement>
-        <dependencies>
-            <dependency>
-                <groupId>org.junit.vintage</groupId>
-                <artifactId>junit-vintage-engine</artifactId>
-                <version>5.8.2</version>
-            </dependency>
-        </dependencies>
-    </dependencyManagement>
 
     <dependencies>
         <dependency>
@@ -91,14 +80,16 @@
         </dependency>
 
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-        </dependency>
-        
-        <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.junit</groupId>
+            <artifactId>junit-bom</artifactId>
+            <version>5.9.0</version>
+            <type>pom</type>
         </dependency>
 
         <dependency>

@@ -24,6 +24,10 @@ import static org.mockito.Mockito.*;
  * - its methods are called by the test framework instead of a controller
  * - the WordService calls a test double instead of an actual repository
  */
+
+// This test doesn't work because of a dependency problem:
+// 'Failed to resolve org.junit.vintage:junit-vintage-engine:4.12.12'
+
 class WordServiceTest {
     @Test
     @DisplayName("throws exception if length not supported")
