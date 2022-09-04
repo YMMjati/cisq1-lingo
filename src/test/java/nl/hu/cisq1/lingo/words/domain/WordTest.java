@@ -10,7 +10,7 @@ public class WordTest {
 
     @Test
     @DisplayName("length is based on given word")
-    public void lengthBasedOnWord() {
+    void lengthBasedOnWord() {
         Word word = new Word("woord");
 
         int length = word.getLength();

@@ -48,6 +48,11 @@ public class Round {
         return lastfeedback.isWordGuessed();
     }
 
+    public int calculateScore() {
+        return (this.isWordGuessed()) ? (5 * (5 - feedbackList.size())) + 5 : 0;
+    }
+
+
     public String getHint() {
         return this.hint;
     }
@@ -56,11 +61,11 @@ public class Round {
         return this.feedbackList;
     }
 
-    public String getWordToGuess() {
-        return this.wordToGuess;
+    public void setFeedbackList(List<Feedback> feedbackList) {
+        this.feedbackList = feedbackList;
     }
 
-    public int calculateScore() {
-        return (this.isWordGuessed()) ? (5 * (5 - feedbackList.size())) + 5 : 0;
+    public String getWordToGuess() {
+        return this.wordToGuess;
     }
 }

@@ -84,4 +84,8 @@ public class Feedback {
 
         return nextHint;
     }
+
+    public void setMarks(List<Mark> marks) {
+        this.marks = marks;
+    }
 }
