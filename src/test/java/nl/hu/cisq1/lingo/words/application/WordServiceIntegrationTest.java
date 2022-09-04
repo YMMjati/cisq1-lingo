@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// This test doesn't work because of a dependency problem:
+// This test doesn't work in IntelliJ because of a dependency problem:
 // 'Failed to resolve org.junit.vintage:junit-vintage-engine:4.12.12'
 
 @SpringBootTest

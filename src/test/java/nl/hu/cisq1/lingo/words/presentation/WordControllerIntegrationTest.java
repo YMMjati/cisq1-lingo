@@ -16,7 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import static org.hamcrest.Matchers.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-// This test doesn't work because of a dependency problem:
+// This test doesn't work in IntelliJ because of a dependency problem:
 // 'Failed to resolve org.junit.vintage:junit-vintage-engine:4.12.12'
 
 @SpringBootTest

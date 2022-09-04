@@ -25,7 +25,7 @@ import static org.mockito.Mockito.*;
  * - the WordService calls a test double instead of an actual repository
  */
 
-// This test doesn't work because of a dependency problem:
+// This test doesn't work in IntelliJ because of a dependency problem:
 // 'Failed to resolve org.junit.vintage:junit-vintage-engine:4.12.12'
 
 class WordServiceTest {
