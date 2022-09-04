@@ -38,13 +38,13 @@ public class Session {
                 this.getLastRound().getHint(),
                 this.getLastRound().getFeedbackList(),
                 this.calculateTotalScore(),
-                this.rounds.size(),
+                this.getLastRoundNumber(),
                 (this.status == SessionStatus.ELIMINATED) ? this.getLastRound().getWordToGuess() : ""
         );
     }
 
     public void guessWord(String guess) throws SessionFinishedException {
-        Round round = this.rounds.get(rounds.size() - 1);
+        Round round = this.getLastRound();
 
         if (this.status != SessionStatus.PLAYING) {
             throw new SessionFinishedException(this.id);
@@ -53,12 +53,12 @@ public class Session {
         round.guessWord(guess);
 
         if (!this.isWordGuessed() && this.getLastRound().getFeedbackList().size() >= 5) {
-            this.status = SessionStatus.ELIMINATED;
+            this.setStatus(SessionStatus.ELIMINATED);
         }
     }
 
     public boolean isWordGuessed() {
-        if (this.rounds.size() == 0) {
+        if (this.getLastRoundNumber() == 0) {
             return false;
         }
 
@@ -67,8 +67,8 @@ public class Session {
         return round.isWordGuessed();
     }
 
-    private Round getLastRound() {
-        return this.rounds.get(this.rounds.size() - 1);
+    public Round getLastRound() {
+        return this.rounds.get(this.getLastRoundNumber() - 1);
     }
 
     public int calculateTotalScore() {
@@ -78,11 +78,6 @@ public class Session {
         return score;
     }
 
-    public int getNextWordLength() {
-        int[] lengthArray = new int[]{7, 5, 6};
-        return lengthArray[this.rounds.size() % 3];
-    }
-
     public void startNextRound(String wordToGuess) throws SessionFinishedException {
         if (this.status != SessionStatus.PLAYING) {
             throw new SessionFinishedException(this.id);
@@ -90,5 +85,22 @@ public class Session {
 
         Round nextRound = new Round(wordToGuess);
         this.rounds.add(nextRound);
+    }
+
+    public int getNextWordLength() {
+        int[] lengthArray = new int[]{7, 5, 6};
+        return lengthArray[this.getLastRoundNumber() % 3];
+    }
+
+    public SessionStatus getStatus() {
+        return this.status;
+    }
+
+    public void setStatus(SessionStatus status) {
+        this.status = status;
+    }
+
+    public int getLastRoundNumber() {
+        return this.rounds.size();
     }
 }
